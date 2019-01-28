@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="description" content="WeatherO - What The Forecast" />
+		<meta name="theme-color" content="#009688" />
+		<meta name="msapplication-TileColor" content="#009688" />
+		<meta name="msapplication-TileImage" content="./images/logo-192.png" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta
+			name="apple-mobile-web-app-status-bar-style"
+			content="black-translucent"
+		/>
+		<meta name="apple-mobile-web-app-title" content="WeatherO" />
+		<meta name="application-name" content="WeatherO" />
+		<link rel="apple-touch-icon" href="./images/logo-192.png" />
+		<link
+			rel="icon"
+			type="image/png"
+			href="./images/logo-192.png"
+			sizes="32x32"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			href="./images/logo-192.png"
+			sizes="16x16"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="icon" type="image/png" href="images/fav.png" />
+		<title>WeatherO</title>
+		<link rel="manifest" href="manifest.json" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+		/>
+	</head>
+
+	<div class="overlay">
+		<div
+			class="img"
+			style="background: url('./images/forecast/03d.jpg'); background-size: cover"
+		></div>
+		<div class="cover"></div>
+	</div>
+	<div id="main">
+		<div class="city-name">
+			<span class="pointer"><i class="fas fa-map-marker-alt"></i></span>
+			<input
+				aria-label="City Name"
+				class="city"
+				type="search"
+				placeholder="Type City Name"
+				onsubmit="javascript:void(0)"
+				onkeyup="typing(this)"
+				onfocus="typing(this)"
+			/>
+		</div>
+
+		<div class="search-result"></div>
+
+		<div class="weather">
+			<h2 class="celcius">
+				<span class="number">00 <span class="degree">&#176;</span></span>
+			</h2>
+			<p class="feedback">Feedback</p>
+		</div>
+
+		<div class="footer">
+			<div class="humidity">
+				<span class="humidity-number">0%</span>
+				<p>HUMIDITY</p>
+			</div>
+			<div class="separator"></div>
+			<div class="wind">
+				<span class="wind-number">0</span>
+				<p>WIND km/h</p>
+			</div>
+		</div>
+	</div>
+
+	<body>
+		<script>
+			// If browser supports Service Worker..
+			if ('serviceWorker' in navigator) {
+				// if supported - register
+				navigator.serviceWorker
+					.register('./sw.js')
+					.then(() => console.log('SW Registered'))
+					.catch(error => console.log('SW Registration Failed: :^(', error));
+			}
+		</script>
+		<script src="./js/city.list.js"></script>
+		<script src="./js/script.js"></script>
+	</body>
+</html>
