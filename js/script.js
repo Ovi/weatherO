@@ -32,11 +32,11 @@ function getLocation() {
 				fetchData('', current);
 			},
 			function(error) {
-				if (error.code == error.PERMISSION_DENIED) alert('PERMISSION DENIED');
+				if (error.code == error.PERMISSION_DENIED) console.log('LOCATION PERMISSION DENIED');
 			},
 		);
 	} else {
-		alert('Geolocation is not supported by this browser.');
+		console.log('Geolocation is not supported by this browser.');
 	}
 }
 
