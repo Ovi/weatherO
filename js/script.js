@@ -13,7 +13,7 @@ let inWind = document.querySelector('.wind-number');
 let background = document.querySelector('.img');
 let searchResult = document.querySelector('.search-result');
 
-(function() {
+(function () {
 	fetchData();
 	getLocation();
 })();
@@ -21,7 +21,7 @@ let searchResult = document.querySelector('.search-result');
 function getLocation() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(
-			function(position) {
+			function (position) {
 				const {
 					coords: { latitude, longitude },
 				} = position;
@@ -31,7 +31,7 @@ function getLocation() {
 				};
 				fetchData('', current);
 			},
-			function(error) {
+			function (error) {
 				if (error.code == error.PERMISSION_DENIED) console.log('LOCATION PERMISSION DENIED');
 			},
 		);
@@ -58,15 +58,13 @@ function fetchData(city, current) {
 		.then(res => res.json())
 		.then(res => {
 			inCity.value = res.name;
-			inDegree.innerHTML = `${
-				res.main.temp
-			} <span class="degree">&#176;</span>`;
+			inDegree.innerHTML = `${res.main.temp
+				} <span class="degree">&#176;</span>`;
 			inFeedback.innerHTML = res.weather[0].description;
 			inHumidity.innerHTML = `${res.main.humidity}%`;
 			inWind.innerHTML = res.wind.speed;
-			background.style = `background: url('./images/forecast/${
-				res.weather[0].icon
-			}.jpg'); background-size: cover`;
+			background.style = `background: url('./images/forecast/${res.weather[0].icon
+				}.jpg'); background-size: cover`;
 		})
 		.catch(err => {
 			alert('We are offline');
@@ -76,12 +74,19 @@ function fetchData(city, current) {
 
 function typing(elem) {
 	searchResult.style = 'display: block';
+	const searchTerm = (elem.value || '').toLowerCase()
+	const foundCities = cities.filter(c => c.city.toLowerCase().startsWith(searchTerm));
+	if (foundCities.length) {
+		const max = foundCities.length < 5 ? foundCities.length : 5;
 
-	const result = cities[cities.findIndex(x => x.city.includes(elem.value))];
-	if (result && Object.keys(result).length > 1) {
-		searchResult.innerHTML = `
-		<li onclick="fetchData('${result.city}')">${result.city}</li>
-		`;
+		const cityHTML = [];
+		for (let i = 0; i < max; i++) {
+			const country = foundCities[i];
+			const item = `<li onclick="fetchData('${country.city}')">${country.city}</li>`;
+			cityHTML.push(item);
+		}
+
+		searchResult.innerHTML = cityHTML.join('');
 	} else {
 		searchResult.innerHTML = `
 		<li>Nothing Found!</li>

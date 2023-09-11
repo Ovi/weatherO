@@ -1,7 +1,7 @@
 'use strict';
 
 // Static Files as version
-var staticCache = 'v0.01';
+var staticCache = 'v0.2';
 
 // Files to cache
 var files = [

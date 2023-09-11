@@ -84,7 +84,7 @@ input:-webkit-autofill {
 	margin: auto;
 	background: none;
 	padding-left: 15px;
-	border: none;
+	border: 2px solid gray;
 	color: white;
 	text-transform: uppercase;
 	font-size: 18px;
